@@ -12,7 +12,7 @@ import redis.clients.jedis.JedisPoolConfig;
  * @date 2018-1-19 11:33
  */
 @Configuration
-public class RedisConfig {
+public class MyJedisPoolConfig {
     @Value("${redisPool.maxIdle}")
     private int maxIdle;
 
@@ -22,8 +22,32 @@ public class RedisConfig {
     @Value("${redisPool.testOnBorrow}")
     private boolean testOnBorrow;
 
+    public int getMaxIdle() {
+        return maxIdle;
+    }
+
+    public void setMaxIdle(int maxIdle) {
+        this.maxIdle = maxIdle;
+    }
+
+    public int getMaxTotal() {
+        return maxTotal;
+    }
+
+    public void setMaxTotal(int maxTotal) {
+        this.maxTotal = maxTotal;
+    }
+
+    public boolean isTestOnBorrow() {
+        return testOnBorrow;
+    }
+
+    public void setTestOnBorrow(boolean testOnBorrow) {
+        this.testOnBorrow = testOnBorrow;
+    }
+
     @Bean
-    public JedisPoolConfig jedisPoolConfig() {
+    public JedisPoolConfig newJedisPoolConfig() {
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setMaxIdle(maxIdle);
         jedisPoolConfig.setMaxTotal(maxTotal);

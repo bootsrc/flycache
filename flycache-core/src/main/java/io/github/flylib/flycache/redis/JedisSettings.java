@@ -12,13 +12,13 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class JedisSettings {
-    @Value("@{redis.timeout}")
+    @Value("${redis.timeout}")
     private int timeout;
 
-    @Value("@{redis.password}")
-    private int password;
+    @Value("${redis.password}")
+    private String password;
 
-    @Value("@{redis.db}")
+    @Value("${redis.db}")
     private int db;
 
     public int getTimeout() {
@@ -29,11 +29,11 @@ public class JedisSettings {
         this.timeout = timeout;
     }
 
-    public int getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(int password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -46,7 +46,7 @@ public class JedisSettings {
     }
 
     @Bean
-    public JedisSettings jedisSettings(){
+    public JedisSettings newJedisSettings(){
         JedisSettings jedisSettings=new JedisSettings();
         jedisSettings.setTimeout(timeout);
         jedisSettings.setPassword(password);
