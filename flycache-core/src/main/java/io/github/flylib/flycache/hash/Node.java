@@ -1,15 +1,21 @@
 package io.github.flylib.flycache.hash;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * 节点的IP实现
  */
 public class Node {
-
-    private String name;
-
     private String ip;
+    private String name;
+    private String port;
+
+    public Node() {
+        this.port = "6379";
+    }
 
     public Node(String name, String ip) {
+        this();
         this.name = name;
         this.ip = ip;
     }
@@ -34,31 +40,37 @@ public class Node {
         this.ip = ip;
     }
 
+    public String getPort() {
+        return port;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
+    }
+
     @Override
     public String toString() {
-
-        if (name != null && !"".equals(name)) {
-            return ip + "-" + name;
-        }
-        return ip;
+        return ip + "-" + name + ":" + port;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (o == null) return false;
-        Node node = (Node) o;
-        if (node.getIp() == null && ip == null && node.getName() == null && name == null) return true;
-        if (name == null && node.getName() != null) return false;
-        if (ip == null && node.getIp() != null) return false;
-        assert ip != null;
-        assert name != null;
-        return name.equals(node.getName()) && ip.equals(node.getIp());
+        if (o == null) {
+            return false;
+        }
+        Node nodeObj = (Node) o;
+        if (StringUtils.isNotEmpty(ip) && StringUtils.isNotEmpty(name) && StringUtils.isNotEmpty(port)) {
+            return ip.equals(nodeObj.getIp()) && name.equals(nodeObj.getName()) && port.equals(nodeObj.getPort());
+        }
+
+        return this.toString().equals(nodeObj.toString());
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (ip != null ? ip.hashCode() : 0);
+        int result = ip != null ? ip.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (port != null ? port.hashCode() : 0);
         return result;
     }
 }
