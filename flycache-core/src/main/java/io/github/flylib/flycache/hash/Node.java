@@ -24,6 +24,12 @@ public class Node {
         this.ip = ip;
     }
 
+    public Node(String ip, String name, String port) {
+        this.ip = ip;
+        this.name = name;
+        this.port = port;
+    }
+
     public String getName() {
         return name;
     }

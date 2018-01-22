@@ -25,6 +25,11 @@ public class ConsistentHash {
     private ConsistentHash() {
     }
 
+    /**
+     * Get singleton of ConsistentHash
+     * 获取ConsistentHash的单例对象
+     * @return
+     */
     public static ConsistentHash getInstance() {
         return SingletonHolder.instance;
     }
@@ -85,7 +90,7 @@ public class ConsistentHash {
      *
      * @param nodeList 节点列表
      */
-    public void setNodeList(Set<Node> nodeList) {
+    public void setNodeSet(Set<Node> nodeList) {
         this.nodeSet = nodeList;
     }
 

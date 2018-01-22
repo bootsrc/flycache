@@ -4,6 +4,7 @@ import io.github.flylib.flycache.redis.JedisPoolShardFactory;
 import io.github.flylib.flycache.redis.RedisClient;
 import io.github.flylib.flycache.spring.AppContextHolder;
 import io.github.flylib.flycache.hash.Node;
+import io.github.flylib.flycache.util.ShardUtil;
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,18 +28,25 @@ public class IndexController {
     @ResponseBody
     @RequestMapping("testRedis")
     public String testRedis() {
-        JedisPoolShardFactory jedisPoolShardFactory= AppContextHolder.getBean(JedisPoolShardFactory.class);
+        JedisPoolShardFactory jedisPoolShardFactory = AppContextHolder.getBean(JedisPoolShardFactory.class);
         Node node = new Node();
         node.setIp("127.0.0.1");
         node.setName("");
         node.setPort("6379");
-        JedisPool jedisPool= jedisPoolShardFactory.getJedisPool(node);
-        RedisClient redisClient= new RedisClient();
+        JedisPool jedisPool = jedisPoolShardFactory.getJedisPool(node);
+        RedisClient redisClient = new RedisClient();
         redisClient.setJedisPool(jedisPool);
-        String key ="testCache";
+        String key = "testCache";
         redisClient.set(key, "mmmmmmm");
         String value = redisClient.get(key);
         System.out.println(value);
         return value;
+    }
+
+    @ResponseBody
+    @RequestMapping("test1")
+    public String test1() {
+        ShardUtil.initNodes();
+        return "test1 done";
     }
 }
