@@ -16,6 +16,5 @@ flycache: Based on Java consistent-hashing Redis elastic shard storage.
 2. zookeeper保持一致性和监听
 
 ## 文章
-[http://blog.csdn.net/lsm135/article/details/79081776](http://blog.csdn.net/lsm135/article/details/79081776)
-
+ <a href="http://blog.csdn.net/lsm135/article/details/79081776" target="_blank">http://blog.csdn.net/lsm135/article/details/79081776</a>
  
