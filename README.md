@@ -17,4 +17,8 @@ flycache: Based on Java consistent-hashing Redis elastic shard storage.
 
 ## 文章
  <a href="http://blog.csdn.net/lsm135/article/details/79081776" target="_blank">http://blog.csdn.net/lsm135/article/details/79081776</a>
- 
+
+## 测试
+[http://localhost:20200/test1](http://localhost:20200/test1)
+
+[http://localhost:20200/nodeGroup](http://localhost:20200/nodeGroup)
