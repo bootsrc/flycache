@@ -20,6 +20,14 @@ public class RedisClient {
     private Logger logger = LoggerFactory.getLogger(RedisClient.class);
     private JedisPool jedisPool;
 
+    public RedisClient() {
+
+    }
+
+    public RedisClient(JedisPool jedisPool) {
+        this.jedisPool = jedisPool;
+    }
+
     public JedisPool getJedisPool() {
         return jedisPool;
     }
@@ -29,15 +37,27 @@ public class RedisClient {
     }
 
     /**
-     * 关闭Jedis
      *
-     * @param pool
-     * @param redis
+     * @param jedis
      */
     private static void closeJedis(Jedis jedis) {
         if (jedis != null) {
             jedis.close();
         }
+    }
+
+    public String flushDB() {
+        Jedis jedis = null;
+        String result = null;
+        try {
+            jedis = jedisPool.getResource();
+            result = jedis.flushDB();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeJedis(jedis);
+        }
+        return result;
     }
 
     /**
@@ -58,7 +78,6 @@ public class RedisClient {
             jedis = jedisPool.getResource();
             value = jedis.get(key);
         } catch (Exception e) {
-            // jedisPool.returnBrokenResource(jedis);
             e.printStackTrace();
         } finally {
             closeJedis(jedis);
@@ -124,8 +143,7 @@ public class RedisClient {
      * 删除指定的key,也可以传入一个包含key的数组
      * </p>
      *
-     * @param keys
-     *            一个key 也可以使 string 数组
+     * @param keys 一个key 也可以使 string 数组
      * @return 返回删除成功的个数
      */
     public Long del(String... keys) {
@@ -192,8 +210,7 @@ public class RedisClient {
      * </p>
      *
      * @param key
-     * @param fields
-     *            可以是 一个 field 也可以是 一个数组
+     * @param fields 可以是 一个 field 也可以是 一个数组
      * @return
      */
     public Long hdel(String key, String... fields) {
@@ -216,8 +233,7 @@ public class RedisClient {
      * </p>
      *
      * @param key
-     * @param field
-     *            字段
+     * @param field 字段
      * @param value
      * @return 如果存在返回0 异常返回null
      */

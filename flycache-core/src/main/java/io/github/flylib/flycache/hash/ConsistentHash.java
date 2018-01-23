@@ -9,14 +9,18 @@ import java.util.TreeMap;
  * Java implementation of consistent-hashing
  */
 public class ConsistentHash {
-
-    private int virtualNum = 5;  //平均虚拟节点数
+    /**
+     * Vitual node replicates count of node;
+     */
+    private int virtualCount = DEFAULT_VIRTUAL_COUNT;  //平均虚拟节点数
 
     private HashAlgorithm alg = HashAlgorithm.KETAMA_HASH;//采用的HASH算法
 
     private Set<Node> nodeSet;  //节点列表
 
     private final TreeMap<Long/* 节点hash */, Node/* 节点 */> nodeMap = new TreeMap<Long, Node>();
+
+    private static final int DEFAULT_VIRTUAL_COUNT = 5;
 
     private static class SingletonHolder {
         private static ConsistentHash instance = new ConsistentHash();
@@ -28,6 +32,7 @@ public class ConsistentHash {
     /**
      * Get singleton of ConsistentHash
      * 获取ConsistentHash的单例对象
+     *
      * @return
      */
     public static ConsistentHash getInstance() {
@@ -40,7 +45,7 @@ public class ConsistentHash {
     public void buildHashCircle() {
         if (nodeSet == null) return;
         for (Node node : nodeSet) {
-            for (int i = 0; i < virtualNum; i++) {
+            for (int i = 0; i < virtualCount; i++) {
                 long nodeKey = this.alg.hash(node.toString() + "-" + i);
                 nodeMap.put(nodeKey, node);
             }
@@ -68,10 +73,10 @@ public class ConsistentHash {
     /**
      * 设置每个节点的虚拟节点个数，该参数默认是100
      *
-     * @param virtualNum 虚拟节点数
+     * @param virtualCount 虚拟节点数
      */
-    public void setVirtualNum(int virtualNum) {
-        this.virtualNum = virtualNum;
+    public void setVirtualCount(int virtualCount) {
+        this.virtualCount = virtualCount;
     }
 
     /**

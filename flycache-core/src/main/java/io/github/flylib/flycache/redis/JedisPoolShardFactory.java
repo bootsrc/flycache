@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
+import java.util.Set;
+
 /**
  * @author liushaoming
  * @Package io.github.flylib.flycache.redis
@@ -23,7 +25,7 @@ public class JedisPoolShardFactory {
 
         int timeout = jedisSettings.getTimeout();
         int database = jedisSettings.getDb();
-        JedisPool jedisPool = new JedisPool(poolConfig, node.getIp(), new Integer(node.getPort()), timeout, (String)null, database, (String)null);
+        JedisPool jedisPool = new JedisPool(poolConfig, node.getHost(), new Integer(node.getPort()), timeout, (String)null, database, (String)null);
 
         return jedisPool;
     }

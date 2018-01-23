@@ -5,7 +5,6 @@ import io.github.flylib.flycache.redis.RedisClient;
 import io.github.flylib.flycache.spring.AppContextHolder;
 import io.github.flylib.flycache.hash.Node;
 import io.github.flylib.flycache.util.ShardUtil;
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,9 +29,9 @@ public class IndexController {
     public String testRedis() {
         JedisPoolShardFactory jedisPoolShardFactory = AppContextHolder.getBean(JedisPoolShardFactory.class);
         Node node = new Node();
-        node.setIp("127.0.0.1");
-        node.setName("");
+        node.setHost("127.0.0.1");
         node.setPort("6379");
+        node.setRemark("");
         JedisPool jedisPool = jedisPoolShardFactory.getJedisPool(node);
         RedisClient redisClient = new RedisClient();
         redisClient.setJedisPool(jedisPool);

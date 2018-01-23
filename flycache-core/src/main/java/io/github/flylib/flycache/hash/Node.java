@@ -6,44 +6,28 @@ import org.apache.commons.lang3.StringUtils;
  * 节点的IP实现
  */
 public class Node {
-    private String ip;
-    private String name;
+    private String host;
     private String port;
+    private String remark;
 
     public Node() {
         this.port = "6379";
+        this.remark = "";
     }
 
-    public Node(String name, String ip) {
+    public Node(String host, String port, String remark) {
         this();
-        this.name = name;
-        this.ip = ip;
-    }
-
-    public Node(String ip) {
-        this.ip = ip;
-    }
-
-    public Node(String ip, String name, String port) {
-        this.ip = ip;
-        this.name = name;
+        this.host = host;
         this.port = port;
+        this.remark = remark;
     }
 
-    public String getName() {
-        return name;
+    public String getHost() {
+        return host;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
+    public void setHost(String host) {
+        this.host = host;
     }
 
     public String getPort() {
@@ -54,9 +38,17 @@ public class Node {
         this.port = port;
     }
 
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
     @Override
     public String toString() {
-        return ip + "-" + name + ":" + port;
+        return host + ":" + port + "_" + remark;
     }
 
     @Override
@@ -65,8 +57,8 @@ public class Node {
             return false;
         }
         Node nodeObj = (Node) o;
-        if (StringUtils.isNotEmpty(ip) && StringUtils.isNotEmpty(name) && StringUtils.isNotEmpty(port)) {
-            return ip.equals(nodeObj.getIp()) && name.equals(nodeObj.getName()) && port.equals(nodeObj.getPort());
+        if (StringUtils.isNotEmpty(host) && StringUtils.isNotEmpty(remark) && StringUtils.isNotEmpty(port)) {
+            return host.equals(nodeObj.getHost()) && remark.equals(nodeObj.getRemark()) && port.equals(nodeObj.getPort());
         }
 
         return this.toString().equals(nodeObj.toString());
@@ -74,9 +66,9 @@ public class Node {
 
     @Override
     public int hashCode() {
-        int result = ip != null ? ip.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
+        int result = host != null ? host.hashCode() : 0;
         result = 31 * result + (port != null ? port.hashCode() : 0);
+        result = 31 * result + (remark != null ? remark.hashCode() : 0);
         return result;
     }
 }
