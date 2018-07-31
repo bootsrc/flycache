@@ -27,5 +27,5 @@ flycache: Based on Java consistent-hashing Redis elastic shard storage.
 
 |支付宝         | 微信           | 余额宝领红包|
 | ------------- |:-------------:|:-------------:|
-| ![](https://github.com/flylib/fly-seckill/blob/master/alipay.png)      | ![](https://github.com/flylib/fly-seckill/blob/master/wechat.png) | ![](https://github.com/flylib/fly-seckill/blob/master/redPacket.png) |
+| ![](https://github.com/flylib/flycache/blob/master/alipay.png)      | ![](https://github.com/flylib/flycache/blob/master/wechat.png) | ![](https://github.com/flylib/flycache/blob/master/redPacket.png) |
 
