@@ -22,3 +22,10 @@ flycache: Based on Java consistent-hashing Redis elastic shard storage.
 [http://localhost:20200/test1](http://localhost:20200/test1)
 
 [http://localhost:20200/nodeGroup](http://localhost:20200/nodeGroup)
+
+如果您愿意捐助一下项目，可以通过微信/支付宝捐助哟~
+
+|支付宝         | 微信           | 余额宝领红包|
+| ------------- |:-------------:|:-------------:|
+| ![](https://github.com/flylib/fly-seckill/blob/master/alipay.png)      | ![](https://github.com/flylib/fly-seckill/blob/master/wechat.png) | ![](https://github.com/flylib/fly-seckill/blob/master/redPacket.png) |
+
